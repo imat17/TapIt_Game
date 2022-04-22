@@ -6,6 +6,6 @@ mongoose
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 	})
-	.then(() => console.log('Connection à MongoDb réussie'))
-	.catch((err) => console.log('Connection à MongoDb échouée', err));
+	.then(() => console.log('Connection to MongoDb successful'))
+	.catch((err) => console.log('Connection to MongoDb failed', err));
 

@@ -14,7 +14,7 @@ exports.signUp = (req, res) => {
 			});
 			user
 				.save()
-				.then(() => res.status(201).json({ message: `L'utilisateur à bien été crée` }))
+				.then(() => res.status(201).json({ message: `The user has been successfully created` }))
 				.catch((error) => res.status(400).json({ error }));
 		})
 		.catch((error) => res.status(500).json({ error }));
@@ -25,13 +25,13 @@ exports.login = (req, res) => {
 	UserModel.findOne({ pseudo: req.body.pseudo })
 		.then((user) => {
 			if (!user) {
-				return res.status(401).json({ error: ' Utilisateur non trouvé' });
+				return res.status(401).json({ error: 'User not found' });
 			} else {
 				bcrypt
 					.compare(req.body.password, user.password)
 					.then((valid) => {
 						if (!valid) {
-							return res.status(401).json({ error: 'Mot de passe incorrect' });
+							return res.status(401).json({ error: 'Wrong password' });
 						}
 						res.status(200).json({
 							userId: user._id,
