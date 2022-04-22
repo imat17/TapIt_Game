@@ -1,9 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-
+const userRoutes = require('./routes/user');
 
 const app = express();
+
+app.use(express.json());
 
 // Autorisations cors 
 app.use((req, res, next) => {
@@ -17,5 +19,9 @@ app.use((req, res, next) => {
 });
 
 app.use(cors());
+
+// Routes
+
+app.use('/api/user', userRoutes)
 
 module.exports = app;

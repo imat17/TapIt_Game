@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const user =  mongoose.Schema({
+const userSchema =  mongoose.Schema({
         pseudo: {
-        type: String,
+            type: String,
             required: true,
             minlength: 3,
             maxlength: 40,
@@ -12,34 +12,27 @@ const user =  mongoose.Schema({
         password: {
             type: String,
             required: true,
-            max: 1024,
+            maxlength: 1024,
             minlength: 6,
         },
+        score: {
+			type: [
+				{
+					globalScore: Number,
+                    tenSec: Number,
+                    thirtySec: Number,
+                    sixtySec: Number
+				},
+			],
+			required: true,
+		},
     },
-{
+    {
     timestamps: true,
-});
+    }
+);
 
-// Crypt
-user.pre('save', async function (next) {
-	const salt = await bcrypt.genSalt();
-	this.password = await bcrypt.hash(this.password, salt);
-	next();
-});
-
-// Uncrypt
-user.statics.login = async function (pseudo, password) {
-	const user = await this.findOne({ pseudo });
-	if (user) {
-		const auth = await bcrypt.compare(password, user.password);
-		if (auth) {
-			return user;
-		}
-		throw Error('Mot de passe incorrect');
-	}
-	throw Error('Email incorrect');
-};
-
-const UserModel = mongoose.model('user', user);
+const UserModel = mongoose.model('User', userSchema);
 
 module.exports = UserModel;
+
