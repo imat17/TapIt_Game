@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config({ path: '/.env' });
 
 // SignUp
-exports.signUp = (req, res) => {
+exports.signUp =  (req, res) => {
 	bcrypt
 		.hash(req.body.password, 10)
 		.then((hash) => {
