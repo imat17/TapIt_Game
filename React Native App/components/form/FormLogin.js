@@ -1,6 +1,7 @@
 import { View, Text, TextInput, Button } from 'react-native';
 import React, { useState } from 'react';
-import client from '../api/client';
+import client from '../../api/client';
+import styles from '../../styles/components/Home';
 
 const getInitialState = (fieldKeys) => {
     const state = {};
@@ -11,10 +12,10 @@ const getInitialState = (fieldKeys) => {
     return state;
   };
   
-  const Form = ({ fields, buttonText }) => {
+  const FormLogin = ({ fields, buttonText }) => {
 
     const handleRegister = async () => {
-        await client.post('/api/user/signup', {
+        await client.post('/api/user/login', {
             ...values
         })
         .then((res) => {
@@ -37,14 +38,15 @@ const getInitialState = (fieldKeys) => {
 
  
     return (
-        <View>
+        <View style={styles.inputContainer}>
           {fieldKeys.map((key) => {
             const field = fields[key];
             return (
               <View key={key}>
-                <Text>{field.label}</Text>
                 <TextInput
+                style={styles.input}
                   {...field.inputProps}
+                  placeholder={field.placeholder}
                   value={values[key]}
                   onChangeText={(text) => onChangeValue(key, text)}
                 />
@@ -56,4 +58,5 @@ const getInitialState = (fieldKeys) => {
       );
   };
 
-export default Form;
+
+export default FormLogin

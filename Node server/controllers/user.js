@@ -10,6 +10,7 @@ exports.signUp =  (req, res) => {
 		.then((hash) => {
 			const user = new UserModel({
 				pseudo: req.body.pseudo,
+				email: req.body.email,
 				password: hash,
 			});
 			user
@@ -36,8 +37,12 @@ exports.login = (req, res) => {
 						res.status(200).json({
 							userId: user._id,
 							token: jwt.sign({ userId: user._id }, process.env.JWT, {
+								expiresIn: '1h',
+							}),
+							refreshToken: jwt.sign({ userId: user._id }, process.env.JWT, {
 								expiresIn: '365d',
 							}),
+							
 						});
 					})
 					.catch((error) => res.status(500).json({ error }));
