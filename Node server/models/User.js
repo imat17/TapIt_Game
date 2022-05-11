@@ -25,21 +25,33 @@ const userSchema =  mongoose.Schema({
             trim: true,
         },
         score: {
-			type: [
-				{
-					globalScore: Number,
-                    tenSec: Number,
-                    thirtySec: Number,
-                    sixtySec: Number,
-                    multiplayer: [
-                        {
-                            wins: Number,
-                            globalScore: Number,
-                        }
-                    ],
-				},
-			],
-			required: true,
+			globalScore: {
+                type: Number,
+                default: 0,
+                required: true,
+            },
+			tenSec: {
+                type: Number,
+                default: 0,
+                required: true,
+            },
+			thirtySec: {
+                type: Number,
+                default: 0,
+                required: true,
+            },
+			sixtySec: {
+                type: Number,
+                default: 0,
+                required: true,
+            },
+            multiplayer: {
+                victories: {
+                    type: Number,
+                    default: 0,
+                    required: true,
+                }
+            },
 		},
     },
     {

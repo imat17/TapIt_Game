@@ -35,11 +35,11 @@ exports.login = (req, res) => {
 							return res.status(401).json({ error: 'Wrong password' });
 						}
 						res.status(200).json({
-							userId: user._id,
+							_id: user._id,
 							token: jwt.sign({ userId: user._id }, process.env.JWT, {
 								expiresIn: '1h',
 							}),
-							refreshToken: jwt.sign({ userId: user._id }, process.env.JWT, {
+							refreshToken: jwt.sign({ userId: user._id }, process.env.RJWT, {
 								expiresIn: '365d',
 							}),
 							

@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const userRoutes = require('./routes/user');
+const scoresRoutes = require('./routes/score');
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use(cors());
 // Routes
 
 app.use('/api/user', userRoutes)
+app.use('/api/scores', scoresRoutes)
 
 module.exports = app;

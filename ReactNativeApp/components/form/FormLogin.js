@@ -1,7 +1,9 @@
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, TextInput, Button } from 'react-native';
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import client from '../../api/client';
 import styles from '../../styles/components/Home';
+
 
 const getInitialState = (fieldKeys) => {
     const state = {};
@@ -14,20 +16,23 @@ const getInitialState = (fieldKeys) => {
   
   const FormLogin = ({ fields, buttonText }) => {
 
+    const navigation = useNavigation();
+
     const handleRegister = async () => {
-        await client.post('/api/user/login', {
-            ...values
-        })
-        .then((res) => {
-            console.log(res.data);
-            setValues(getInitialState(fieldKeys))
-            // window.location = '/Play';
+      await client.post('/api/user/login', {
+        ...values
+      })
+      .then((res) => {
+        console.log(res.data);
+        setValues(getInitialState(fieldKeys))
+        navigation.navigate('Home');
         })
         .catch((err) => {
             console.log(err);
         })
         console.log(values);
       }
+
 
     const fieldKeys = Object.keys(fields);
     const [values, setValues] = useState(getInitialState(fieldKeys));

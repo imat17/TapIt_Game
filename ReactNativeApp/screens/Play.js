@@ -1,12 +1,31 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
 
-const Play = () => {
+const Play = (props) => {
+
+  const [score, setScore] = useState(0);
+
+  let mode = props.route.params.mode;
+
+  const handleTouch = () => {
+    setScore(score + 1);
+  }
+
+
   return (
-    <View>
-      <Text>Play</Text>
-    </View>
+      <TouchableOpacity style={styles.center} onPress={handleTouch}>
+        <Text>Play {mode}</Text>
+        <Text>{score}</Text>
+      </TouchableOpacity>
   )
 }
+
+const styles = StyleSheet.create({
+  center: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default Play

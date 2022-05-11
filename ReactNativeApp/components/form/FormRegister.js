@@ -2,6 +2,7 @@ import { View, Text, TextInput, Button } from 'react-native';
 import React, { useState } from 'react';
 import client from '../../api/client';
 import styles from '../../styles/components/Home';
+import { useNavigation } from '@react-navigation/native';
 
 
 const getInitialState = (fieldKeys) => {
@@ -15,13 +16,16 @@ const getInitialState = (fieldKeys) => {
   
   const Form = ({ fields, buttonText }) => {
 
+    const navigation = useNavigation();
+
     const handleRegister = async () => {
         await client.post('/api/user/signup', {
             ...values
         })
         .then((res) => {
             console.log(res);
-            setValues(getInitialState(fieldKeys))
+            setValues(getInitialState(fieldKeys));
+            navigation.navigate('Login');
         })
         .catch((err) => {
             console.log(err);
