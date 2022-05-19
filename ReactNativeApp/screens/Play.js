@@ -1,31 +1,36 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import SelectMode from '../components/play/SelectMode';
+import client from '../api/client';
 
-const Play = (props) => {
+const Play = () => {
 
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState();
 
-  let mode = props.route.params.mode;
+  const id = '627a3930f01ea620de3dfddf';
 
-  const handleTouch = () => {
-    setScore(score + 1);
-  }
-
+  useEffect(() => {
+   const fetchScores = async () => {
+      await client.get('/api/scores/allscores', {
+        _id: id,
+      })
+      .then((res) => {
+        console.log(res.data)
+        // setScore(res.score.globalScore);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    };
+      fetchScores()
+  }, [])
 
   return (
-      <TouchableOpacity style={styles.center} onPress={handleTouch}>
-        <Text>Play {mode}</Text>
-        <Text>{score}</Text>
-      </TouchableOpacity>
+    <View>
+      <Text>{score}</Text>
+      <SelectMode />
+    </View>
   )
 }
-
-const styles = StyleSheet.create({
-  center: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default Play

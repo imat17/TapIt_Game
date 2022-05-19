@@ -25,7 +25,7 @@ const getInitialState = (fieldKeys) => {
       .then((res) => {
         console.log(res.data);
         setValues(getInitialState(fieldKeys))
-        navigation.navigate('Home');
+        navigation.navigate('Play');
         })
         .catch((err) => {
             console.log(err);

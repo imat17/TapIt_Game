@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
 import FormLogin from '../components/form/FormLogin';
 import { useNavigation } from '@react-navigation/native';
+import Appstyles from '../App.scss';
 
 const Login = ( { validateContent, validateLength }) => {
 
@@ -12,10 +13,10 @@ const Login = ( { validateContent, validateLength }) => {
   }
 
   return (
-    <View style={styles.center}>
+    <View style={Appstyles.center}>
       <View>
-        <Text style={styles.title}>Hello Again !</Text>
-        <Text style={styles.subtitle}>Welcome back, you've been missed!</Text>
+        <Text style={Appstyles.title}>Hello Again !</Text>
+        <Text style={Appstyles.subtitle}>Welcome back, you've been missed!</Text>
       </View>
       <FormLogin fields={{
         pseudo: {
@@ -39,28 +40,6 @@ const Login = ( { validateContent, validateLength }) => {
       </Text>
     </View>
   )
-};
-
-const styles = StyleSheet.create({
-  center: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
-  title: {
-   fontSize: 22,
-   color: 'rgb(0,1,63)',
-   fontWeight: 'bold',
-   padding: 10,
-   textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: 17,
-    color: 'rgb(39,33,33)',
-    textAlign: 'center',
-    padding: 10,
-  }
-});
+}
 
 export default Login;
