@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import client from '../../api/client';
 import styles from '../../styles/components/Home';
-
+import { setCredentials } from '../../config/storage';
 
 const getInitialState = (fieldKeys) => {
     const state = {};
@@ -23,14 +23,15 @@ const getInitialState = (fieldKeys) => {
         ...values
       })
       .then((res) => {
-        console.log(res.data);
-        setValues(getInitialState(fieldKeys))
+        // console.log(res.data);
+        setValues(getInitialState(fieldKeys));
+        setCredentials(res.data);
         navigation.navigate('Play');
         })
         .catch((err) => {
             console.log(err);
         })
-        console.log(values);
+        // console.log(values);
       }
 
 
