@@ -2,6 +2,7 @@ import { View, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import SelectMode from '../components/play/SelectMode';
 import client from '../api/client';
+import { getCredentials } from '../config/storage';
 
 const Play = () => {
 
